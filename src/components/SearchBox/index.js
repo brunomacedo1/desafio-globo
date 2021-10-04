@@ -1,5 +1,5 @@
 export function SearchBox() {
   return(
-    <div></div>
+    <input type="text" placeholder="Pesquise por termos ou categorias..."/>
   )
 }
