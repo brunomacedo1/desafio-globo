@@ -2,16 +2,15 @@
   background: url(../../assets/background.svg);
   background-size: cover;
   background-position: center center;
+  height: 23rem;
 }
 
 .headerContent{
   margin: 0 auto;
   max-width: 1120px;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
+  padding: 2rem;
 }
 
 .headerNav{
@@ -76,7 +75,7 @@
   margin-left: 2rem;
   display: flex;
   justify-content: center;
-  p {
+  span {
     color: var(--pink);
     font-size: 1.3rem;
     font-style: italic;

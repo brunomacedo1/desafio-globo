@@ -1,0 +1,64 @@
+.cardContainer{
+  margin: -6rem auto;
+  max-width: 1120px;
+  div + div {
+    margin-top: 0.5rem;
+  }
+  padding: 2rem;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  div {
+    width: 4.8125rem;
+    height: 1.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    border: 1px solid #fde8ed;
+    border-radius: 0.5rem;
+    strong {
+      font-size: 0.625rem;
+      color: var(--pink);
+    }
+  }
+}
+
+.searchBox {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  height: 3.5rem;
+  width: 100%;
+  border-radius: 0.5rem;
+
+  input {
+    width: 14rem;
+    height: 3.5rem;
+    border: none;
+    font-size: 0.875rem;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

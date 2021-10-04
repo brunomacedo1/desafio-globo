@@ -22,8 +22,8 @@ export function Header() {
           <div className="spacer"></div>
         </div>
         <div className={styles.headerThirdLine}>
-          <p>Feed de <strong>Insights</strong>
-          </p> 
+          <span>Feed de <strong>Insights</strong>
+          </span> 
         </div>
       </div>
     </header>
