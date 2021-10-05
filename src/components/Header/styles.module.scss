@@ -1,3 +1,5 @@
+
+// Estilização da página Home
 .headerWrapper {
   background: url(../../assets/background.svg);
   background-size: cover;
@@ -18,10 +20,12 @@
   justify-content: space-between;
   align-items: center;
 
-  > img {
-    width: 4rem;
-    height: 3rem;
-  }
+  a{
+    img {
+      width: 4rem;
+      height: 3rem;
+    }
+  } 
 
   div {
     img{
@@ -80,4 +84,51 @@
     font-size: 1.3rem;
     font-style: italic;
   }
+}
+
+
+// Estilização da Página AddInsight
+
+.headerAddInsightWrapper {
+  background: url(../../assets/background.svg);
+  background-size: cover;
+  background-position: center center;
+  height: 6.375rem; 
+  
+}
+
+
+.headerAddInsightNav {
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    margin-right: auto;
+  }
+
+  div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    p, strong {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--pink);
+    }
+    
+    p{
+      font-weight: 300;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
 }

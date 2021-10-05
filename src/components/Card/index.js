@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { SearchBox } from '../SearchBox'
 import styles from './styles.module.scss'
 
-export function Card({cards}) {
+export function CardComponent({cards}) {
   return (
     <div  className={styles.cardContainer}>
       {
@@ -26,3 +27,7 @@ export function Card({cards}) {
     </div>
   )
 }
+
+export const Card = memo(CardComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.cards, nextProps.cards)
+})
