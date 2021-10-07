@@ -6,10 +6,11 @@ import {
   useHistory
 } from "react-router-dom";
 import arrowBack from '../../assets/arrow-back.svg'
+import { useAuth } from '../../services/hooks/useAuth';
 
 export function Header() {
   const history = useHistory();
-
+  const { user, signOut } = useAuth();
   //Renderiza o Header da página Home
   if(history.location.pathname === "/") {
     return (
@@ -28,8 +29,9 @@ export function Header() {
             </Link>
           </nav>
           <div className={styles.headerSecondLine}>
-            <p>Olá, Usuário!</p>
-            <span>email@email.com.br</span>
+            <p>Olá, {user.username}</p>
+            <span>{user.email}</span>
+            <button onClick={() => signOut()}>Deslogar</button>
             <div className="spacer"></div>
           </div>
           <div className={styles.headerThirdLine}>
