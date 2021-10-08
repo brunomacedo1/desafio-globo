@@ -27,7 +27,7 @@ export function AuthContextProvider({children}) {
         })
         setUser(data)
       } catch (err) {
-        toast.error(err.message)
+        console.log(err)
       } finally {
         setIsLoading(false);
       }
@@ -76,9 +76,16 @@ export function AuthContextProvider({children}) {
   }
 
   async function signOut() {
-    await api.post('/rest-auth/logout/')
-    localStorage.clear()
-    history.push('/login')
+    setIsLoading(true)
+    try {
+      await api.post('/rest-auth/logout/')
+      localStorage.clear()
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+      history.push('/login')
+    }
   }
 
   return (
