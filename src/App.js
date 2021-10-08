@@ -11,24 +11,27 @@ import { AddInsight } from "./pages/AddInsight";
 import { Login } from "./pages/Login";
 import { AuthContextProvider } from "./context/auth/AuthContext";
 
+
 function App() {
   return (
-      <Router>
-        <AuthContextProvider>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/addInsight">
-              <AddInsight />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </Switch>
-        <Toaster />
+    <>
+    <Toaster />
+    <Router>
+      <AuthContextProvider>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/addInsight">
+                <AddInsight />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
       </AuthContextProvider>  
     </Router>
+    </>
   );
 }
 

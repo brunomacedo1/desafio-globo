@@ -1,30 +1,38 @@
 import { memo } from 'react'
 import { SearchBox } from '../SearchBox'
 import styles from './styles.module.scss'
+import dotsImg from '../../assets/three_dots.svg'
 
-export function CardComponent({cards}) {
-  
+export function CardComponent({cards, handleFetchMoreInsights, handleSearch}) {
   return (
     <div  className={styles.cardContainer}>
       {
-        cards?.map(card=> {
+        cards?.cards?.map(card=> {
           return (
             <div key={card.id} className={styles.cardContent}>
               <p>
                 {card.texto}
               </p>
               {
-                card.tag && (
+                card.tags && (
                   <div>
-                    <strong>{card.tag.name}</strong>
+                    <strong>{card.tags.name}</strong>
                   </div>
                 )
               }
-          </div>
+            </div>
           )
         })
       }
-      <SearchBox className={styles.searchBox}/>
+
+      { cards?.next && (
+        <div className={styles.cardButtons}>
+          <img src={dotsImg} alt="Pontos" />
+          <button type="button" onClick={handleFetchMoreInsights}>Toque para exibir mais Insights</button>
+        </div>
+      )}
+
+      <SearchBox className={styles.searchBox} handleSearch={handleSearch}/>
     </div>
   )
 }

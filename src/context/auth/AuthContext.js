@@ -8,14 +8,15 @@ export const AuthContext = createContext({});
 export function AuthContextProvider({children}) {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ user, setUser ] = useState(null);
+  const [ token, setToken ] = useState(null);
   const history = useHistory();
   const  isAuthenticated = !!user;
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    setToken(localStorage.getItem('token'))
 
     if(!token) {
-      <Redirect to="/login" />
+      return (<Redirect to="/login" /> )
     }
 
     async function fetchUserData() {
@@ -35,7 +36,7 @@ export function AuthContextProvider({children}) {
 
     fetchUserData()
 
-  }, [])
+  }, [token])
 
   async function signIn(formData) {
     
@@ -54,7 +55,7 @@ export function AuthContextProvider({children}) {
       
       if(response.status === 200) {
         localStorage.setItem('token', response.data.key)
-
+        
         const { data, status} = await api.get('rest-auth/user/',{
           headers: {
             'Authorization': `Token ${response.data.key}` 
@@ -62,16 +63,15 @@ export function AuthContextProvider({children}) {
         })
 
         if(status === 200) {
+          setToken(response.data.key)
           setUser(data)
           history.push("/")
-          return;
         }
-
-        return
       }
 
     } catch (err) {
-      toast.error('Erro ao fazer login, tente novamente.')
+      console.log(err)
+      toast.error(' ao fazer login, tente novamente.')
     }
   }
 
@@ -84,12 +84,13 @@ export function AuthContextProvider({children}) {
       console.log(err)
     } finally {
       setIsLoading(false)
+      setToken(null)
       history.push('/login')
     }
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, user, setUser, isAuthenticated, signOut, isLoading }}>
+    <AuthContext.Provider value={{ signIn, user, setUser, isAuthenticated, signOut, isLoading, token }}>
       {children}
     </AuthContext.Provider>
   )

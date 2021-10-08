@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 
 export function AddInsight() {
 
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, token } = useAuth();
 
   if(isLoading) {
     return (
@@ -30,7 +30,6 @@ export function AddInsight() {
     }
 
     try {
-      const token = localStorage.getItem('token')
       const {status} = await api.post('api/cards/', formData, {
         headers: {
           'Authorization': `Token ${token}`
