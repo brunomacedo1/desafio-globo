@@ -12,23 +12,22 @@ import { Login } from "./pages/Login";
 import { AuthContextProvider } from "./context/auth/AuthContext";
 
 function App() {
-  
   return (
-    <Router>
-      <AuthContextProvider>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/addInsight">
-            <AddInsight />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-        </Switch>
-      <Toaster />
-      </AuthContextProvider>
+      <Router>
+        <AuthContextProvider>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/addInsight">
+              <AddInsight />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        <Toaster />
+      </AuthContextProvider>  
     </Router>
   );
 }

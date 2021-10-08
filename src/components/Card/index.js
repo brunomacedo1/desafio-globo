@@ -3,6 +3,7 @@ import { SearchBox } from '../SearchBox'
 import styles from './styles.module.scss'
 
 export function CardComponent({cards}) {
+  
   return (
     <div  className={styles.cardContainer}>
       {
@@ -13,9 +14,9 @@ export function CardComponent({cards}) {
                 {card.texto}
               </p>
               {
-                card.tags && (
+                card.tag && (
                   <div>
-                    <strong>{card.tags.name}</strong>
+                    <strong>{card.tag.name}</strong>
                   </div>
                 )
               }

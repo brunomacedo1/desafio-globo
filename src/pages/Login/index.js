@@ -6,7 +6,6 @@ export function Login() {
   const { signIn } = useAuth();
   const [ username, setUserName] = useState('');
   const [ password, setPassword] = useState('');
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -16,7 +15,7 @@ export function Login() {
     }
     await signIn(formData);
   }
-  
+
   return (
     <div className={styles.loginWrapper}>
       <form className={styles.loginContainer} onSubmit={handleSubmit}>

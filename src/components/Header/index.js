@@ -29,8 +29,8 @@ export function Header() {
             </Link>
           </nav>
           <div className={styles.headerSecondLine}>
-            <p>Olá, {user.username}</p>
-            <span>{user.email}</span>
+            <p>Olá, {user?.username}</p>
+            <span>{user?.email}</span>
             <button onClick={() => signOut()}>Deslogar</button>
             <div className="spacer"></div>
           </div>

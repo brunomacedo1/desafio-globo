@@ -38,7 +38,7 @@
   }
 
   input {
-    width: 14rem;
+    max-width: 62rem;
     height: 3.5rem;
     border: none;
     font-size: 0.875rem;
@@ -46,11 +46,21 @@
     font-weight: normal;
   }
 
+  input::placeholder {
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+  }
+
   textarea {
     border: 0;
     max-width: 62rem;
     resize: none;
     height: 16rem;
+  }
+
+  textarea::placeholder {
+    padding-top: 1rem;
+    padding-left: 0.5rem;
   }
 
   span {

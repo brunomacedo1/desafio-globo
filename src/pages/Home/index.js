@@ -1,96 +1,61 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
+import { api } from "../../services/api";
 import { useAuth } from "../../services/hooks/useAuth";
-import { useHistory } from "react-router";
+import { Redirect } from 'react-router-dom'
 
-
-const cards = [
-  {
-    id: 1,// identificador
-    texto: "Primeira partida de um grupo difícil exigiu que o time carioca virasse o placar em dois momentos do jogo", // texto do card
-    data_criacao:  new Intl.DateTimeFormat('pt-BR').format(new Date()), // data da criação do card
-    data_modificacao: new Intl.DateTimeFormat('pt-BR').format(new Date()),// data da última alteração do card
-    tags: {
-      id: 1,
-      name: "TEMPORADA",
-    } // tags vinculas ao card
-  },
-  {
-    id: 2,// identificador
-    texto: "Primeira partida de um grupo difícil exigiu que o time carioca virasse o placar em dois momentos do jogo", // texto do card
-    data_criacao:  new Intl.DateTimeFormat('pt-BR').format(new Date()), // data da criação do card
-    data_modificacao: new Intl.DateTimeFormat('pt-BR').format(new Date()),// data da última alteração do card
-    tags: {
-      id: 1,
-      name: "TEMPORADA",
-    } // tags vinculas ao card
-  },
-  {
-    id: 3,// identificador
-    texto: "Primeira partida de um grupo difícil exigiu que o time carioca virasse o placar em dois momentos do jogo", // texto do card
-    data_criacao:  new Intl.DateTimeFormat('pt-BR').format(new Date()), // data da criação do card
-    data_modificacao: new Intl.DateTimeFormat('pt-BR').format(new Date()),// data da última alteração do card
-    tags: {
-      id: 1,
-      name: "TEMPORADA",
-    } // tags vinculas ao card
-  },
-  {
-    id: 4,// identificador
-    texto: "Primeira partida de um grupo difícil exigiu que o time carioca virasse o placar em dois momentos do jogo", // texto do card
-    data_criacao:  new Intl.DateTimeFormat('pt-BR').format(new Date()), // data da criação do card
-    data_modificacao: new Intl.DateTimeFormat('pt-BR').format(new Date()),// data da última alteração do card
-    tags: {
-      id: 1,
-      name: "TEMPORADA",
-    } // tags vinculas ao card
-  },
-  {
-    id: 5,// identificador
-    texto: "Primeira partida de um grupo difícil exigiu que o time carioca virasse o placar em dois momentos do jogo", // texto do card
-    data_criacao:  new Intl.DateTimeFormat('pt-BR').format(new Date()), // data da criação do card
-    data_modificacao: new Intl.DateTimeFormat('pt-BR').format(new Date()),// data da última alteração do card
-    tags: {
-      id: 1,
-      name: "TEMPORADA",
-    } // tags vinculas ao card
-  },
-]
 
 export function Home() {
-  const { isAuthenticated } = useAuth();
-  const history = useHistory();
+  const { isAuthenticated, isLoading } = useAuth();
+  const [ cards, setCards ] = useState([]);
 
-  useEffect(() => {
-    //Criar requisição para popular os dados de card
-  },[])
   
-  if(!isAuthenticated) {
+  useEffect(() => {
+    async function fetchCards() {
+      const token = localStorage.getItem('token')
+      try{
+        const { data, status } = await api.get('api/cards/', {
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        });
+        if(status === 200) {
+          const card = data.map(card => {
+            return {
+              id: card.id,
+              texto: card.texto,
+              tag: card.tags
+            }
+          })
 
-    setTimeout(() => {
-      history.push("/login")
-    }, 5000)
+          setCards(card)
+        }
+      } catch(err){
+        return
+      }
+    }
 
+    fetchCards()
+  },[])
+
+  if(isLoading) {
     return(
-      <div>
-        <h1>
-          Faça login para visualizar página, <br/> você será redirecionado automaticamente
-        </h1>
-        <Link to="/login">
-          <button>
-            Login
-          </button>
-        </Link>
-      </div>
+      <div></div>
     )
   }
-
+  
   return (
     <>
-      <Header />
-      <Card cards={cards}/>
+    { isAuthenticated ? (
+        <>
+          <Header />
+          <Card cards={cards}/>
+        </>
+      ) : (
+        <Redirect to="/login" />
+      )
+    }
     </>
   )
 }

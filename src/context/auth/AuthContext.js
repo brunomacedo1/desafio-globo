@@ -1,29 +1,36 @@
 import { createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { api } from '../../services/api'
 
 export const AuthContext = createContext({});
 
 export function AuthContextProvider({children}) {
+  const [ isLoading, setIsLoading ] = useState(true);
+  const [ user, setUser ] = useState(null);
   const history = useHistory();
-  const [ user, setUser ] = useState();
-  const isAuthenticated = !!user;
+  const  isAuthenticated = !!user;
 
   useEffect(() => {
     const token = localStorage.getItem('token')
 
     if(!token) {
-      return
+      <Redirect to="/login" />
     }
 
     async function fetchUserData() {
-      const { data } = await api.get('rest-auth/user/',{
-        headers: {
-          'Authorization': `Token ${token}` 
-        }
-      })
-      setUser(data)
+      try {
+        const { data } = await api.get('rest-auth/user/',{
+          headers: {
+            'Authorization': `Token ${token}` 
+          }
+        })
+        setUser(data)
+      } catch (err) {
+        toast.error(err.message)
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchUserData()
@@ -46,12 +53,11 @@ export function AuthContextProvider({children}) {
       const response = await api.post('/rest-auth/login/', formData)
       
       if(response.status === 200) {
-        const token = response.data.key
-        localStorage.setItem('token', token)
+        localStorage.setItem('token', response.data.key)
 
         const { data, status} = await api.get('rest-auth/user/',{
           headers: {
-            'Authorization': `Token ${token}` 
+            'Authorization': `Token ${response.data.key}` 
           }
         })
 
@@ -61,7 +67,6 @@ export function AuthContextProvider({children}) {
           return;
         }
 
-        toast.error('Algo deu errado, tente novamente')
         return
       }
 
@@ -77,7 +82,7 @@ export function AuthContextProvider({children}) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, user, setUser, isAuthenticated, signOut }}>
+    <AuthContext.Provider value={{ signIn, user, setUser, isAuthenticated, signOut, isLoading }}>
       {children}
     </AuthContext.Provider>
   )
