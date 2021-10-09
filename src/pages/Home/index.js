@@ -3,7 +3,7 @@ import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { useAuth } from "../../services/hooks/useAuth";
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import toast from "react-hot-toast";
 
 export function Home() {
@@ -66,7 +66,12 @@ export function Home() {
 
   if(isLoading) {
     return(
-      <div></div>
+      <div>
+        <p>
+          Faça login para visualizar a página
+        </p>
+        <Link to="/login" />
+      </div>
     )
   }
 

@@ -10,7 +10,11 @@ import './styles/global.scss' //Reset de css e config de variáveis de cores.
 import { AddInsight } from "./pages/AddInsight";
 import { Login } from "./pages/Login";
 import { AuthContextProvider } from "./context/auth/AuthContext";
+import Modal from 'react-modal';
+import { ModalContextProvider } from "./context/modalContext";
+import { RegistrationModal } from "./components/RegistrationModal";
 
+Modal.setAppElement('#root');
 
 function App() {
   return (
@@ -18,17 +22,20 @@ function App() {
     <Toaster />
     <Router>
       <AuthContextProvider>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/addInsight">
-                <AddInsight />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-            </Switch>
+        <ModalContextProvider>
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/addInsight">
+                  <AddInsight />
+                </Route>
+                <Route exact path="/login">
+                  <Login />
+                </Route>
+              </Switch>
+              <RegistrationModal />
+        </ModalContextProvider>
       </AuthContextProvider>  
     </Router>
     </>
