@@ -16,7 +16,7 @@ export function AuthContextProvider({children}) {
     setToken(localStorage.getItem('token'))
 
     if(!token) {
-      return (<Redirect to="/login" /> )
+      return (<Redirect to="/" /> )
     }
 
     async function fetchUserData() {
@@ -65,7 +65,7 @@ export function AuthContextProvider({children}) {
         if(status === 200) {
           setToken(response.data.key)
           setUser(data)
-          history.push("/")
+          history.push("/home")
         }
       }
 
@@ -85,7 +85,7 @@ export function AuthContextProvider({children}) {
     } finally {
       setIsLoading(false)
       setToken(null)
-      history.push('/login')
+      history.push('/')
     }
   }
 

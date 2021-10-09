@@ -12,7 +12,7 @@ export function Header() {
   const history = useHistory();
   const { user, signOut } = useAuth();
   //Renderiza o Header da página Home
-  if(history.location.pathname === "/") {
+  if(history.location.pathname === "/home") {
     return (
       <header className={styles.headerWrapper}>
         <div className={styles.headerContent}>
@@ -48,7 +48,7 @@ export function Header() {
     return (
       <header className={styles.headerAddInsightWrapper}>
         <nav className={styles.headerAddInsightNav}>
-          <Link to="/">
+          <Link to="/home">
             <img src={arrowBack} alt="Back button" />
           </Link>
           <div>

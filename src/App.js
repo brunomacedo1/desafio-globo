@@ -24,13 +24,13 @@ function App() {
       <AuthContextProvider>
         <ModalContextProvider>
               <Switch>
-                <Route exact path="/">
+                <Route exact path="/home">
                   <Home />
                 </Route>
                 <Route exact path="/addInsight">
                   <AddInsight />
                 </Route>
-                <Route exact path="/login">
+                <Route exact path="/">
                   <Login />
                 </Route>
               </Switch>
