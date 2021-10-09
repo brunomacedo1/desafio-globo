@@ -24,10 +24,14 @@ A interface consome uma api feita em python(django), e tem a funcionalidade de e
 a partir da "tag" vinculada ao card.
 
 ## 🚀 Como executar
-
-- Clone o repositório
-- Instale as dependências com `yarn`
+- Antes de executar nossa aplicação react, é necessário deixamos nossa api Django rodando.
+- Entre no repositorio da API(https://github.com/brunomacedo1/api-globo), e siga o passo passo.
+- Com a api rodando em nosso localhost, agora podemos fazer o clone da nossa aplicação react.
+- Para instalar as dependencias utilize o comando `yarn`
 - Inicie a aplicação com `yarn start`
+- A seguir crie seu usuário para fazer login
+- Faça o login na página, crie seus insights
+- Os insigths serão listados na página Home, onde também é possível filtra-los por categoria.
 
 Agora você pode acessar [`localhost:3000`](http://localhost:3000) do seu navegador.
 
